@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 
@@ -37,6 +37,9 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    filter_backends = (OrderingFilter,)
+    ordering_fields = ('author', 'text', 'pub_date')
+    ordering = ('pub_date',)
     permission_classes = (ReadOrAuthorPermission, IsAuthenticatedOrReadOnly)
     pagination_class = LimitOffsetPagination
 
