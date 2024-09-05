@@ -9,7 +9,7 @@ from api.permissions import ReadOrAuthorPermission
 from api.serializers import (CommentSerializer, FollowSerializer,
                              GroupSerializer, PostSerializer)
 from api.viewsets import CreateListViewSet
-from posts.models import Follow, Group, Post
+from posts.models import Group, Post
 
 User = get_user_model()
 
